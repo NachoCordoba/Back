@@ -1,5 +1,9 @@
-import { json } from 'body-parser';
+import { json, urlencoded } from 'body-parser';
 import express, { Express, Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
+
+import UserModule from './modules/user/user.module';
+
 
 export default class Server {
     private app: Express = express();
@@ -13,6 +17,7 @@ export default class Server {
         this.port = port;
 
         this.configure();
+        this.startMongo();
         this.initModules();
     }
 
@@ -32,6 +37,7 @@ export default class Server {
             }
         );
 
+        this.app.use(urlencoded({ extended: false }));
         this.app.use(json());
     }
 
@@ -46,10 +52,17 @@ export default class Server {
     }
 
     /**
+     * Start DB Connection
+     */
+    private startMongo(){
+        mongoose.connect('mongodb+srv://sa:IgnaCord@cluster0.ollq8.mongodb.net/conexa?retryWrites=true&w=majority', { });
+    }
+
+    /**
      * Init Modules
      */
     private initModules(){
-
+        new UserModule(this.app);
     }
 
 }
