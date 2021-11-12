@@ -1,5 +1,6 @@
 import { Request, Response} from 'express';
 import UserBussiness from './user.bussiness';
+import IUser from './user.interface';
 
 export default class UserController{
     private userBussiness: UserBussiness;
@@ -8,19 +9,45 @@ export default class UserController{
         this.userBussiness = userBussiness;
     }
 
-    public async getUsers(): Promise<any[]>{
-        return await this.userBussiness.getUsers();
+    public getPaginatedUser = async (req: Request, res: Response)=>{
+        const { page, limit } = req.query;
+        try{
+            return res.status(200).json(await this.userBussiness.getPaginatedUser(Number(page), Number(limit)));
+        }
+        catch(err: any){
+            return res.status(400).json({ err: true, errMsg: err.message });
+        }
     }
     
-    public async addUser(user: any): Promise<any>{
-        return await this.userBussiness.addUser(user);
+    public addUser = async (req: Request, res: Response)=>{
+        const reqUser : IUser = req.body;
+        try{
+            const newUser = await this.userBussiness.addUser(reqUser);
+            return res.status(200).json(newUser);
+        }
+        catch(err: any){
+            return res.status(400).json({ err: true, errMsg: err.message });
+        }
     }
 
-    public async deleteUser(_id: String){
-        return await this.userBussiness.deleteUser(_id);
+    public deleteUser = async (req: Request, res: Response)=>{
+        const { id } = req.params;
+        try{
+            return res.status(200).json(await this.userBussiness.deleteUser(id));
+        }
+        catch(err: any){
+            return res.status(400).json({ err: true, errMsg: err.message });
+        }
     }
 
-    public async updateUser(_id: String, updates: any){
-        return await this.userBussiness.updateUser(_id, updates);
+    public  updateUser = async (req: Request, res: Response)=>{
+        const { id } = req.params;
+        const updates = req.body;
+        try{
+            return res.status(200).json(await this.userBussiness.updateUser(id, updates));
+        }
+        catch(err: any){
+            return res.status(400).json({ err: true, errMsg: err.message });
+        }
     }
 }

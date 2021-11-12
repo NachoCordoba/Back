@@ -1,3 +1,4 @@
+import IUser from "./user.interface";
 import UserRepository from "./user.repository";
 
 export default class UserBussiness{
@@ -7,11 +8,11 @@ export default class UserBussiness{
         this.userRepository = userRepository;
     }
 
-    public async getUsers(): Promise<any[]>{
-        return this.userRepository.getUsers();
+    public async getPaginatedUser(page: number, limit: number): Promise<any>{
+        return this.userRepository.getPaginatedUser(page, limit);
     }
     
-    public async addUser(user: any): Promise<any>{
+    public async addUser(user: IUser): Promise<IUser>{
         return this.userRepository.addUser(user);
     }
 

@@ -1,3 +1,4 @@
+import IUser from './user.interface';
 import userModel from './user.model';
 
 export default class UserRepository{
@@ -5,11 +6,38 @@ export default class UserRepository{
 
     }
 
-    public async getUsers(): Promise<any[]>{
-        return userModel.find();
+    public async getUsersCount(): Promise<number>{
+        return userModel.countDocuments();
+    }
+
+    public async getPaginatedUser(page: number, limit: number): Promise<{
+        
+    }>{
+        return {
+            page,
+            limit,
+            count: await this.getUsersCount(),
+            data: await userModel.find().limit(limit).skip(page * limit)
+        }
     }
     
-    public async addUser(user: any): Promise<any>{
+    public async getUserByName(userName: String): Promise<IUser>{
+        return userModel.findOne({ userName });
+    }
+
+    public async getUserByEmail(userEmail: String): Promise<IUser>{
+        return userModel.findOne({ userEmail });
+    }
+
+    public async validate(user: IUser): Promise<void>{
+        if(await this.getUserByName(user.userName))
+            throw new Error('El Usuario ingresado ya existe.');
+        if(await this.getUserByEmail(user.userEmail))
+            throw new Error('El Email ingresado ya existe.');
+    }
+    
+    public async addUser(user: IUser): Promise<IUser>{
+        await this.validate(user);
         return userModel.create(user);
     }
 

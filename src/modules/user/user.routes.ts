@@ -11,15 +11,15 @@ export default class UserRouter {
 
     private configureRoutes(app: Express){
         app.route('/user')
-        .get(this.routeController.getUsers);
+        .get(this.routeController.getPaginatedUser);
 
         app.route('/user')
         .post(this.routeController.addUser);
 
-        app.route('/user')
+        app.route('/user/:id')
         .delete(this.routeController.deleteUser);
 
-        app.route('/user')
+        app.route('/user/:id')
         .put(this.routeController.updateUser);
     }
 }

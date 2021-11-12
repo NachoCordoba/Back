@@ -3,7 +3,8 @@ import { Schema, model } from 'mongoose';
 export const UserSchema = new Schema({
     userName:{
         type: String,
-        required: [true, 'Nombre de usuario requerido.']
+        lowercase: true,
+        trim: true
     },
     userPassword:{
         type: String,
@@ -11,7 +12,8 @@ export const UserSchema = new Schema({
     },
     userEmail:{
         type: String,
-        required: [true, 'Email requerido.']
+        lowercase: true,
+        trim: true
     }
 });
 
