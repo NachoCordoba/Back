@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import UserController from './user.controller';
+import authenticateToken from '../../middlewares/authToken';
 
 export default class UserRouter {
     private routeController: UserController;
@@ -11,19 +12,19 @@ export default class UserRouter {
 
     private configureRoutes(app: Express){
         app.route('/user')
-        .get(this.routeController.getPaginatedUser);
+        .get(authenticateToken, this.routeController.getPaginatedUser);
 
         app.route('/user/:userName')
-        .get(this.routeController.getUserByName);
+        .get(authenticateToken, this.routeController.getUserByName);
 
         app.route('/user')
-        .post(this.routeController.addUser);
+        .post(authenticateToken, this.routeController.addUser);
 
         app.route('/user/:id')
-        .delete(this.routeController.deleteUser);
+        .delete(authenticateToken, this.routeController.deleteUser);
 
         app.route('/user/:id')
-        .put(this.routeController.updateUser);
+        .put(authenticateToken, this.routeController.updateUser);
     }
 }
 

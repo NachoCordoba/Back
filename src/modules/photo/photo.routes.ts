@@ -1,4 +1,5 @@
 import { Express } from 'express';
+import authenticateToken from '../../middlewares/authToken';
 import PhotoController from './photo.controller';
 
 export default class PhotoRouter {
@@ -11,7 +12,7 @@ export default class PhotoRouter {
 
     private configureRoutes(app: Express){
         app.route('/photo')
-        .get(this.routeController.getPhotos);
+        .get(authenticateToken, this.routeController.getPhotos);
     }
 }
 

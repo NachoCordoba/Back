@@ -1,4 +1,5 @@
 import { Express } from 'express';
+import authenticateToken from '../../middlewares/authToken';
 import PostController from './post.controller';
 
 export default class PostRouter {
@@ -11,7 +12,7 @@ export default class PostRouter {
 
     private configureRoutes(app: Express){
         app.route('/post')
-        .get(this.routeController.getPosts);
+        .get(authenticateToken, this.routeController.getPosts);
     }
 }
 
