@@ -1,6 +1,9 @@
 import { json, urlencoded } from 'body-parser';
 import express, { Express, Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
+import AuthentificationModule from './modules/authentification/authentification.module';
+import PhotoModule from './modules/photo/photo.module';
+import PostModule from './modules/post/post.module';
 
 import UserModule from './modules/user/user.module';
 
@@ -63,6 +66,9 @@ export default class Server {
      */
     private initModules(){
         new UserModule(this.app);
+        new PostModule(this.app);
+        new PhotoModule(this.app);
+        new AuthentificationModule(this.app);
     }
 
 }
