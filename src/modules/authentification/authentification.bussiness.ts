@@ -10,7 +10,8 @@ export default class UserBussiness{
     }
 
     public async registerUser(userName: String, userPassword: String, userEmail: String){
-        const { data } = await axios.post('http://localhost:3000/user', { userName, userPassword, userEmail });
+        const userModule = process.env.USER_MODULE ? process.env.USER_MODULE : 'http://localhost:3000/user';
+        const { data } = await axios.post(userModule, { userName, userPassword, userEmail });
 
         if(!data)
             throw new Error('Ocurrio un error con el modulo de usuarios');
@@ -36,7 +37,8 @@ export default class UserBussiness{
     }
 
     private async validateLogin(userName: String, userPassword: String){
-        const { data } = await axios.get(`http://localhost:3000/user/${userName}`);
+        const userModule = process.env.USER_MODULE ? process.env.USER_MODULE : 'http://localhost:3000/user';
+        const { data } = await axios.get(`${userModule}/${userName}`);
 
         if(!data)
             throw new Error('Usuario o Clave incorrectos.');
@@ -49,6 +51,8 @@ export default class UserBussiness{
     }
 
     private generateJWT(user: any){
-        return jwt.sign(user, 'secret', { expiresIn: '1800s'})
+        const secret_token = process.env.SECRET_TOKEN ? process.env.SECRET_TOKEN : 'secret';
+        const expiresIn = process.env.EXPIRES_TOKEN ? process.env.EXPIRES_TOKEN : '1800s';
+        return jwt.sign(user, secret_token, { expiresIn: expiresIn });
     }
 }

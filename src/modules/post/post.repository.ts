@@ -7,7 +7,8 @@ export default class PostRepository{
     }
 
     public async getPosts(): Promise<IPost[]>{
-        const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        const postUri = process.env.POST_URI ? process.env.POST_URI : 'https://jsonplaceholder.typicode.com/posts'
+        const { data } = await axios.get(postUri);
         return data;
     }
 }

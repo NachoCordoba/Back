@@ -16,11 +16,11 @@ export default class Server {
      * Constructor
      * @param port : Listen Port
      */
-    constructor(port: Number){
+    constructor(port: Number, mongoUri: string){
         this.port = port;
 
         this.configure();
-        this.startMongo();
+        this.startMongo(mongoUri);
         this.initModules();
     }
 
@@ -57,8 +57,10 @@ export default class Server {
     /**
      * Start DB Connection
      */
-    private startMongo(){
-        mongoose.connect('mongodb+srv://sa:IgnaCord@cluster0.ollq8.mongodb.net/conexa?retryWrites=true&w=majority', { });
+    private startMongo(mongoUri: string){
+        mongoose.connect(mongoUri, { },()=>{
+            console.log('Conectado correctamente a la bases de datos.');
+        });
     }
 
     /**

@@ -7,7 +7,8 @@ export default class PhotoRepository{
     }
 
     public async getPhotos(): Promise<IPhoto[]>{
-        const { data } = await axios.get('https://jsonplaceholder.typicode.com/photos');
+        const photoUri = process.env.PHOTO_URI ? process.env.PHOTO_URI : 'https://jsonplaceholder.typicode.com/photos';
+        const { data } = await axios.get(photoUri);
         return data;
     }
 
