@@ -1,5 +1,8 @@
 import { Schema, model } from 'mongoose';
 
+/**
+ * Authentification Model Schema
+ */
 export const AuthetificationSchema = new Schema({
     authentificationUser:{
         type: String,

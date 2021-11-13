@@ -1,6 +1,9 @@
 import IAuthentification from './authentification.interface';
 import authentificationModel from './authentification.model';
 
+/**
+ * Authentification Repository - Database Manager
+ */
 export default class AuthentificationRepository{
     constructor(){
 

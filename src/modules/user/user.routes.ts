@@ -2,14 +2,26 @@ import { Express } from 'express';
 import UserController from './user.controller';
 import authenticateToken from '../../middlewares/authToken';
 
+/**
+ * User Router
+ */
 export default class UserRouter {
     private routeController: UserController;
 
+    /**
+     * Connect User Routes with User Controller
+     * @param app 
+     * @param routeController 
+     */
     constructor(app: Express, routeController: UserController = new UserController()){
         this.routeController = routeController;
         this.configureRoutes(app);
     }
 
+    /**
+     * Configure User Routes
+     * @param app 
+     */
     private configureRoutes(app: Express){
         app.route('/user')
         .get(authenticateToken, this.routeController.getPaginatedUser);

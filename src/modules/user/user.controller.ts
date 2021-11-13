@@ -2,13 +2,26 @@ import { Request, Response} from 'express';
 import UserBussiness from './user.bussiness';
 import IUser from './user.interface';
 
+/**
+ * User Controller
+ */
 export default class UserController{
     private userBussiness: UserBussiness;
 
+    /**
+     * Connect User Controller with User Bussiness
+     * @param userBussiness 
+     */
     constructor(userBussiness: UserBussiness = new UserBussiness()){
         this.userBussiness = userBussiness;
     }
 
+    /**
+     * Get Paginated Users
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     public getPaginatedUser = async (req: Request, res: Response)=>{
         const { page, limit } = req.query;
         try{
@@ -19,6 +32,12 @@ export default class UserController{
         }
     }
 
+    /**
+     * Get User By Name
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     public getUserByName = async (req: Request, res: Response)=>{
         const { userName } = req.params;
         try{
@@ -29,6 +48,12 @@ export default class UserController{
         }
     }
     
+    /**
+     * Add new User
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     public addUser = async (req: Request, res: Response)=>{
         const reqUser : IUser = req.body;
         try{
@@ -40,6 +65,12 @@ export default class UserController{
         }
     }
 
+    /**
+     * Delete User
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     public deleteUser = async (req: Request, res: Response)=>{
         const { id } = req.params;
         try{
@@ -50,6 +81,12 @@ export default class UserController{
         }
     }
 
+    /**
+     * Update User
+     * @param req 
+     * @param res 
+     * @returns 
+     */
     public  updateUser = async (req: Request, res: Response)=>{
         const { id } = req.params;
         const updates = req.body;

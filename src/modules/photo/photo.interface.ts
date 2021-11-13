@@ -1,3 +1,6 @@
+/**
+ * Photo Interface
+ */
 export default interface IPhoto{
     albumId: Number,
     id: Number,

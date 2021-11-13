@@ -1,5 +1,8 @@
 import { Schema, model } from 'mongoose';
 
+/**
+ * User Model Schema
+ */
 export const UserSchema = new Schema({
     userName:{
         type: String,

@@ -1,6 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
+/**
+ * 
+ * Validation Token Middleware
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ * @returns 
+ */
 export default function authenticateToken(req: Request, res: Response, next: NextFunction){
     const token = req.headers['authorization'];
 
