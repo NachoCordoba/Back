@@ -11,6 +11,10 @@ export default class UserBussiness{
     public async getPaginatedUser(page: number, limit: number): Promise<any>{
         return this.userRepository.getPaginatedUser(page, limit);
     }
+
+    public async getUserByName(userName: String): Promise<IUser>{
+        return this.userRepository.getUserByName(userName);
+    }
     
     public async addUser(user: IUser): Promise<IUser>{
         return this.userRepository.addUser(user);

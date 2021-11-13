@@ -13,6 +13,9 @@ export default class UserRouter {
         app.route('/user')
         .get(this.routeController.getPaginatedUser);
 
+        app.route('/user/:userName')
+        .get(this.routeController.getUserByName);
+
         app.route('/user')
         .post(this.routeController.addUser);
 

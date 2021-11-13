@@ -18,6 +18,16 @@ export default class UserController{
             return res.status(400).json({ err: true, errMsg: err.message });
         }
     }
+
+    public getUserByName = async (req: Request, res: Response)=>{
+        const { userName } = req.params;
+        try{
+            return res.status(200).json(await this.userBussiness.getUserByName(userName));
+        }
+        catch(err: any){
+            return res.status(400).json({ err: true, errMsg: err.message });
+        }
+    }
     
     public addUser = async (req: Request, res: Response)=>{
         const reqUser : IUser = req.body;
