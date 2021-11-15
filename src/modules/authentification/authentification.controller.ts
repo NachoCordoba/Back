@@ -26,6 +26,9 @@ export default class AuthentificationController{
         try{
             const { userName, userPassword } = req.body;
 
+            if(!userName)
+                throw new Error('El Usuario es requerido');
+
             return res.status(200).json(await this.authentificationBussiness.loginUser(userName, userPassword));
         }
         catch(err: any){

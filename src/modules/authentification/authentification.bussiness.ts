@@ -76,7 +76,7 @@ export default class AuthentificationBussiness{
             throw new Error('Usuario o Clave incorrectos.');
 
         this.authentificationRepository.makeAuth({ authentificationUser: data._id , authentificationDate: new Date() });        
-        return data;        
+        return data;       
     }
 
     /**
