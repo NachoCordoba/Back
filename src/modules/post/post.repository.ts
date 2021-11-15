@@ -18,4 +18,18 @@ export default class PostRepository{
         const { data } = await axios.get(postUri);
         return data;
     }
+
+    /**
+     * Get Paginated Posts from Uri
+     * @returns 
+     */
+     public async getPaginatedPosts(page: number, limit: number): Promise<any>{
+        const post = await this.getPosts();
+        return {
+            page,
+            limit,
+            count: post.length,
+            data: post.slice(page * limit, (page * limit) + limit)
+        };
+    }
 }

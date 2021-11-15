@@ -40,6 +40,7 @@ export default class UserController{
      */
     public getUserByName = async (req: Request, res: Response)=>{
         const { userName } = req.params;
+
         try{
             return res.status(200).json(await this.userBussiness.getUserByName(userName));
         }

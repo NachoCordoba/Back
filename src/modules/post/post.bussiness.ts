@@ -16,10 +16,18 @@ export default class PostBussiness{
     }
 
     /**
-     * Get Pagginated Post
+     * Get Listed Post
      * @returns 
      */
     public async getPosts(): Promise<IPost[]>{
         return this.postRepository.getPosts();
+    }
+
+    /**
+     * Get Paginated Post
+     * @returns 
+     */
+     public async getPaginatedPosts(page: number, limit: number): Promise<IPost[]>{
+        return this.postRepository.getPaginatedPosts(page, limit);
     }
 }

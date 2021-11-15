@@ -36,7 +36,7 @@ export default class PhotoRepository{
             page,
             limit,
             count: photos.length,
-            data: photos.slice(page * limit, limit)
+            data: photos.slice(page * limit, (page * limit) + limit)
         };
     }
 }

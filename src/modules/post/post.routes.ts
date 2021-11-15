@@ -25,6 +25,9 @@ export default class PostRouter {
     private configureRoutes(app: Express){
         app.route('/post')
         .get(authenticateToken, this.routeController.getPosts);
+
+        app.route('/paginatedPost')
+        .get(authenticateToken, this.routeController.getPaginatedPosts);
     }
 }
 
