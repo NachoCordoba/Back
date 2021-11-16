@@ -10,3 +10,7 @@
 ## To Do:
 - Testing
 - Docker
+
+
+## API Documentation and Testing:
+https://www.postman.com/ignacord/workspace/conexa
